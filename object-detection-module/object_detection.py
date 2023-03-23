@@ -12,44 +12,24 @@ from io import StringIO
 from matplotlib import pyplot as plt
 from PIL import Image
 
-# This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
 from object_detection.utils import ops as utils_ops
 
 if StrictVersion(tf.__version__) < StrictVersion('1.12.0'):
   raise ImportError('Please upgrade your TensorFlow installation to v1.12.*.')
 
-
-# ## Env setup
-
-# In[13]:
-
-
-# This is needed to display the images.
-#get_ipython().run_line_magic('matplotlib', 'inline')
-
 from utils import label_map_util
 from utils import visualization_utils as vis_util
 
-# What model to download.
+.
 MODEL_NAME = 'model961'
 MODEL_FILE = MODEL_NAME + '/frozen_inference_graph.pb'
 #DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
 
-# Path to frozen detection graph. This is the actual model that is used for the object detection.
-PATH_TO_FROZEN_GRAPH = 'C:\\Users\dark_knight\Desktop\AIT\Projects\VideoSummarization\Transfer_Learning\object_detection_model\output_inference_graph_v1.pb\\frozen_inference_graph.pb'
+PATH_TO_FROZEN_GRAPH = ' '
 
 # List of the strings that is used to add correct label for each box.
 PATH_TO_LABELS = 'C:\\Users\dark_knight\Desktop\AIT\Projects\VideoSummarization\Transfer_Learning\object_detection_model\label_map.pbtxt'
-
-
-# ## Download Model
-
-# In[ ]:
-
-# ## Load a (frozen) Tensorflow model into memory.
-
-# In[16]:
 
 
 detection_graph = tf.Graph()
@@ -60,20 +40,7 @@ with detection_graph.as_default():
     od_graph_def.ParseFromString(serialized_graph)
     tf.import_graph_def(od_graph_def, name='')
 
-
-# ## Loading label map
-# Label maps map indices to category names, so that when our convolution network predicts `5`, we know that this corresponds to `airplane`.  Here we use internal utility functions, but anything that returns a dictionary mapping integers to appropriate string labels would be fine
-
-# In[17]:
-
-
 category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
-
-
-# ## Helper code
-
-# In[18]:
-
 
 def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
@@ -82,7 +49,7 @@ def load_image_into_numpy_array(image):
 
 
 
-PATH_TO_TEST_IMAGES_DIR = 'C:\\Users\\dark_knight\\Desktop\\AIT\\Projects\\VideoSummarization\\Transfer_Learning\\Frames'
+PATH_TO_TEST_IMAGES_DIR = '  '
 ct=0
 for filename in os.listdir(PATH_TO_TEST_IMAGES_DIR+"\\"):
 	if filename.endswith(".jpg"):
@@ -90,13 +57,11 @@ for filename in os.listdir(PATH_TO_TEST_IMAGES_DIR+"\\"):
 
 TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(i)) for i in range(1, ct+1) ]
 
-# Size, in inches, of the output images.
 IMAGE_SIZE = (12, 8)
 
 def run_inference_for_single_image(image, graph):
   with graph.as_default():
-    with tf.Session() as sess:
-      # Get handles to input and output tensors
+    with tf.Session() as sesss
       ops = tf.get_default_graph().get_operations()
       all_tensor_names = {output.name for op in ops for output in op.outputs}
       tensor_dict = {}
@@ -139,7 +104,7 @@ def run_inference_for_single_image(image, graph):
         output_dict['detection_masks'] = output_dict['detection_masks'][0]
   return output_dict
 
-BASE_PATH = "C:\\Users\dark_knight\Desktop\AIT\Projects\VideoSummarization\\Transfer_Learning"
+BASE_PATH = "  "
 f2 = open(BASE_PATH + "\\Frames\\"+"boolean_map.txt","w")
 
 for image_path in TEST_IMAGE_PATHS:
@@ -151,7 +116,6 @@ for image_path in TEST_IMAGE_PATHS:
 	image_np_expanded = np.expand_dims(image_np, axis=0)
   # Actual detection.
 	output_dict = run_inference_for_single_image(image_np, detection_graph)
-  # Visualization of the results of a detection.
 	temp = False
 	for i in output_dict['detection_scores']:
 		if(i > 0.6):
