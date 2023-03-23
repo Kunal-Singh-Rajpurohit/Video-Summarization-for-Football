@@ -3,7 +3,7 @@ import numpy as np
 import pytesseract
 import argparse
 import cv2
-BASE_PATH = "C:\\Users\dark_knight\Desktop\AIT\Projects\VideoSummarization\\Transfer_Learning"
+BASE_PATH = "  "
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
 def decode_predictions(scores, geometry):
