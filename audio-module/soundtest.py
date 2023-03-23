@@ -5,9 +5,9 @@ import math
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 import moviepy.editor as mp
 import sys
-BASE_PATH = "C:\\Users\dark_knight\Desktop\AIT\Projects\VideoSummarization\\Transfer_Learning"
+BASE_PATH = "  "
 
-filename=BASE_PATH+"\\Video\\2_HQ.mkv"
+filename=BASE_PATH+"video.mkv"
 clip = mp.VideoFileClip(filename)
 clip.audio.write_audiofile("theaudio.wav")
 sampFreq, snd = wavfile.read('theaudio.wav')
